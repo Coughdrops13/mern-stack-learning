@@ -19,7 +19,7 @@ router.delete("/:id", (req, res) => {
   res.json({ mssg: "DELETE a single workout" });
 });
 // UPDATE a single workout
-router.patch("/", (req, res) => {
+router.patch("/:id", (req, res) => {
   res.json({ mssg: "UPDATE  a single workout" });
 });
 
