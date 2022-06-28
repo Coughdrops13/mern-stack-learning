@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WorkoutsForm = () => {
+const WorkoutForm = () => {
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -35,6 +35,8 @@ const WorkoutsForm = () => {
       },
     });
 
+    console.log('RESPONSE', response);
+
     const json = await response.json();
 
     if (!response.ok) {
@@ -52,7 +54,7 @@ const WorkoutsForm = () => {
   };
 
   return (
-    <form className="create">
+    <form className="create"  onSubmit={submitHandler}>
       <h3>Add a New Workout</h3>
       <label>Exercise Title:</label>
       <input type="text" onChange={titleChangeHandler} value={title} />
@@ -60,10 +62,10 @@ const WorkoutsForm = () => {
       <input type="number" onChange={loadChangeHandler} value={load} />
       <label>Reps</label>
       <input type="number" onChange={repsChangeHandler} value={reps} />
-      <button onSubmit={submitHandler}>Add Workout</button>
+      <button>Add Workout</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
 };
 
-export default WorkoutsForm;
+export default WorkoutForm;
