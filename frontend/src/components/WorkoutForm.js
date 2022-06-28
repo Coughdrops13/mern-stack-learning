@@ -35,8 +35,6 @@ const WorkoutForm = () => {
       },
     });
 
-    console.log('RESPONSE', response);
-
     const json = await response.json();
 
     if (!response.ok) {
