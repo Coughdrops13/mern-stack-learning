@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useWorkoutsContext } from "../hooks/use-workoutsContext";
 
 const WorkoutForm = () => {
+  const { dispatch } = useWorkoutsContext();
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -38,21 +40,23 @@ const WorkoutForm = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      setError(json.error)
+      setError(json.error);
     }
     if (response.ok) {
       setError(null);
-      setTitle('');
-      setLoad('');
-      setReps('');
-      console.log('New workout added!', json);      
+      setTitle("");
+      setLoad("");
+      setReps("");
+      console.log("New workout added!", json);
+      dispatch({
+        type: "CREATE_WORKOUT",
+        payload: json,
+      });
     }
-
-
   };
 
   return (
-    <form className="create"  onSubmit={submitHandler}>
+    <form className="create" onSubmit={submitHandler}>
       <h3>Add a New Workout</h3>
       <label>Exercise Title:</label>
       <input type="text" onChange={titleChangeHandler} value={title} />
