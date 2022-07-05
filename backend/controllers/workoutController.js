@@ -4,11 +4,9 @@ const mongoose = require("mongoose");
 // GET all workouts
 const getWorkouts = async (req, res) => {
   const workouts = await Workout.find({}).sort({ createdAt: -1 });
-  
+
   res.status(200).json(workouts);
 };
-
-
 
 // GET a single workout
 const getWorkout = async (req, res) => {
@@ -27,11 +25,27 @@ const getWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-
-
 // CREATE a new workout
 const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
+
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+  if (!load) {
+    emptyFields.push("load");
+  }
+  if (!reps) {
+    emptyFields.push("reps");
+  }
+  if (emptyFields.length > 0) {
+    console.log('ITSWORKING', emptyFields)
+    return res
+      .status(400)
+      .json({ error: "Please fill all required fields", emptyFields });
+  }
 
   // add document to db
   try {
@@ -41,8 +55,6 @@ const createWorkout = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
 
 // DELETE a single workout
 const deleteWorkout = async (req, res) => {
@@ -59,8 +71,6 @@ const deleteWorkout = async (req, res) => {
 
   res.status(200).json(workout);
 };
-
-
 
 // UPDATE a single workout
 const updateWorkout = async (req, res) => {
@@ -81,4 +91,10 @@ const updateWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-module.exports = { getWorkouts, getWorkout, createWorkout, deleteWorkout, updateWorkout };
+module.exports = {
+  getWorkouts,
+  getWorkout,
+  createWorkout,
+  deleteWorkout,
+  updateWorkout,
+};
