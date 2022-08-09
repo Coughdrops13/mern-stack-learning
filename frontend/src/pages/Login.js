@@ -1,5 +1,5 @@
 import { useState } from "react";
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,8 +17,8 @@ const Register = () => {
   };
 
   return (
-    <form className="register" onSubmit={submitHandler}>
-      <h3>Register New User</h3>
+    <form className="login" onSubmit={submitHandler}>
+      <h3>Login User</h3>
       <label>Email</label>
       <input
         type="email"
@@ -31,9 +31,9 @@ const Register = () => {
         onChange={passwordChangeHandler}
         value={password}
       />
-      <button>Register</button>
+      <button>Login</button>
     </form>
   );
 };
 
-export default Register;
+export default Login;
