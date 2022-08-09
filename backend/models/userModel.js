@@ -29,7 +29,7 @@ userSchema.statics.register = async function (email, password) {
   if (!validator.isStrongPassword(password)) {
     throw Error('Password not strong enough');
   }
-  
+
   const exists = await this.findOne({ email });
 
   if (exists) {
@@ -42,6 +42,11 @@ userSchema.statics.register = async function (email, password) {
   const user = await this.create({ email, password: hash });
 
   return user;
+};
+
+// static login method
+userModel.statics.login = async function () {
+
 };
 
 module.exports = mongoose.model("User", userSchema);
