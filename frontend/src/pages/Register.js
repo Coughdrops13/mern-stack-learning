@@ -2,6 +2,7 @@ import { useState } from "react";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVerify, setPasswordVerify] = useState("");
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
@@ -9,6 +10,10 @@ const Register = () => {
 
   const passwordChangeHandler = (event) => {
     setPassword(event.target.value);
+  };
+
+  const passwordVerifyChangeHandler = (event) => {
+    setPasswordVerify(event.target.value);
   };
 
   const submitHandler = async (event) => {
@@ -30,6 +35,12 @@ const Register = () => {
         type="password"
         onChange={passwordChangeHandler}
         value={password}
+      />
+      <label>Verify Password</label>
+      <input
+        type="password"
+        onChange={passwordVerifyChangeHandler}
+        value={passwordVerify}
       />
       <button>Register</button>
     </form>
